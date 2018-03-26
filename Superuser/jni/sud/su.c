@@ -650,8 +650,21 @@ int main(int argc, char *argv[]) {
 }
 
 int su_main(int argc, char *argv[], int need_client) {
+#ifdef RUN_AS_DAEMON
+    int run_as_daemon = 1;
+#else
+    int run_as_daemon = 0;
+#endif
+    int i;
+    for(i = 0; i < argc; i++) {
+        if (0 == strcmp(argv[i], "--daemon")) {
+            if(run_as_daemon == 0) {
+                run_as_daemon = 1;
+            }
+        }
+    }
     // start up in daemon mode if prompted
-    if (argc == 2 && strcmp(argv[1], "--daemon") == 0) {
+    if(run_as_daemon != 0 && need_client != 0) {
         return run_daemon();
     }
 

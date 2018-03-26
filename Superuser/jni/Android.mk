@@ -5,6 +5,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := sud
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 LOCAL_STATIC_LIBRARIES := sqlite3 libcutils libc
+LOCAL_CFLAGS := -DRUN_AS_DAEMON
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/sqlite3
 LOCAL_SRC_FILES := sud/su.c sud/activity.c sud/db.c sud/utils.c sud/daemon.c sud/pts.c
 include $(BUILD_EXECUTABLE)
